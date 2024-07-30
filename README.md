@@ -5,7 +5,7 @@ Key Concepts : Neuroimaging, fMRI, Multiscale Brain Modeling, Neurotransmitter c
 
 Requirements : NumPy, Matplotlib
 
-Applications
+Applications:
 A. Model Optimization
 B. Model Optimization (Fast)
 C. Community Finding using dFC
