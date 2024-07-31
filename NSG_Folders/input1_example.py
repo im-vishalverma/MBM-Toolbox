@@ -1,7 +1,3 @@
-# The output script files shall look as:
-
-# Created C:\Users\vhima\Downloads\NSG_Folder\AR_20120813/input1.py
-
 import time
 import matplotlib.pyplot as plt
 import numpy as np
@@ -12,13 +8,12 @@ from scipy.special import digamma
 from scipy.signal import filtfilt, butter, hilbert
 from scipy.stats import ks_2samp
 
-file_path = r"AR_20120813_SC.mat"
+file_path = r"AA_20120815_SC.mat"
 mat_file = loadmat(file_path)
 sc = mat_file['SC_cap_agg_bwflav1_norm']
-file_path_ = r"AR_20120813_fMRI_new.mat"
+file_path_ = r"AA_20120815_fMRI_new.mat"
 mat_file_ = loadmat(file_path_)
-key = r'AR_20120813_ROIts_68'
-bold_emp = mat_file_[key]
+bold_emp = mat_file_['AA_20120815_ROIts_68']
 
 num_minutes = 23
 num_sim = int(num_minutes*60*1000) 
@@ -250,8 +245,8 @@ mi_emp = MI_matrix(bold_emp)
 dFC_emp = slicing(bold_emp,window,overlap)
 
 i = 0
-for Tglu in np.arange(0.25,0.25+5,0.25):
-    for Tgaba in np.arange(0.25,0.25+5,0.25):
+for Tglu in np.arange(0.25,5.25,0.25):
+    for Tgaba in np.arange(0.25,5.25,0.25):
         r,x = firing_rate(Tglu,Tgaba)
         bold_sim = bold(r)
         FC_sim = func_connec(bold_sim)
@@ -264,26 +259,23 @@ for Tglu in np.arange(0.25,0.25+5,0.25):
         dFC_sim = slicing(bold_sim,window,overlap)
         ksd = ks_distance_between_matrices(dFC_sim, dFC_emp)
         Xi[i,:] = x,fc_dist,fc_corr,meta,mi_dist,mi_corr,ksd
+        print(Xi[i,:])
         i += 1
 
 f = time.time()
-print("x")
-print("fc_dist")
-print("fc_corr")
-print("meta")
-print("mi_dist")
-print("mi_corr")
-print("ksd")
+print("x", Xi[:,0])
+print("fc_dist", Xi[:,1])
+print("fc_corr", Xi[:,2])
+print("meta", Xi[:,3])
+print("mi_dist" , Xi[:,4])
+print("mi_corr", Xi[:,5])
+print("ksd", Xi[:,6])
 
 print("\n" , f-s , "seconds")
+
 
 # Convert the array to a DataFrame
 df = pd.DataFrame(Xi)
 headers = 'x','fc_dist','fc_corr','meta','mi_dist','mi_corr','ksd'
-# Save the DataFrame as a CSV file
-file_name = f"Xi1.csv"
-df.to_csv(file_name, header=headers, index=False)
 
-print(df.head())
-
-------------------------
+df.to_csv('Xi1.csv', header=headers, index=False)
