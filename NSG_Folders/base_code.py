@@ -282,7 +282,7 @@ headers = 'x','fc_dist','fc_corr','meta','mi_dist','mi_corr','ksd'
 
 # Save the DataFrame as a CSV file
 file_name = f"Xi{ind}.csv"
-df.to_csv(file_name, header=headers, index=False)
+df.to_csv(file_name, columns=headers, index=False)
 
 print(df.head())
 '''
