@@ -263,13 +263,13 @@ for Tglu in np.arange(0.25,5.25,0.25):
         i += 1
 
 f = time.time()
-print("x", Xi[:,0])
-print("fc_dist", Xi[:,1])
-print("fc_corr", Xi[:,2])
-print("meta", Xi[:,3])
-print("mi_dist" , Xi[:,4])
-print("mi_corr", Xi[:,5])
-print("ksd", Xi[:,6])
+print("x")
+print("fc_dist")
+print("fc_corr")
+print("meta")
+print("mi_dist")
+print("mi_corr")
+print("ksd")
 
 print("\n" , f-s , "seconds")
 
