@@ -284,5 +284,5 @@ headers = 'x','fc_dist','fc_corr','meta','mi_dist','mi_corr','ksd'
 file_name = f"Xi{ind}.csv"
 df.to_csv(file_name, columns=headers, index=False)
 
-print(df.head())
+print(df.head().to_string(index=False))
 '''
