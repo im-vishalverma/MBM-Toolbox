@@ -279,3 +279,5 @@ df = pd.DataFrame(Xi)
 headers = 'x','fc_dist','fc_corr','meta','mi_dist','mi_corr','ksd'
 
 df.to_csv('Xi1.csv', header=headers, index=False)
+
+print(df.head())
