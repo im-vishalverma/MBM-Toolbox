@@ -262,6 +262,7 @@ for Tglu in np.arange({Tglu_low},{Tglu_low}+5,0.25):
         dFC_sim = slicing(bold_sim,window,overlap)
         ksd = ks_distance_between_matrices(dFC_sim, dFC_emp)
         Xi[i,:] = x,fc_dist,fc_corr,meta,mi_dist,mi_corr,ksd
+        print(Xi[i,:], ",")
         i += 1
 
 f = time.time()
