@@ -5,7 +5,7 @@ Multiscale Brain Modeling Toolbox
 Neuroimaging, fMRI, Multiscale Brain Modeling, Neurotransmitter concentrations, Model Optimization
 
 # Requirements : 
-NumPy, Matplotlib, SciPy
+NumPy, Matplotlib, SciPy, Tensorflow, JAX
 
 # Applications :
 A. Model Optimization
