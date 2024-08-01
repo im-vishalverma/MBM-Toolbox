@@ -1,4 +1,4 @@
-base_code = r'''
+base_code = '''
 
 import time
 import matplotlib.pyplot as plt
