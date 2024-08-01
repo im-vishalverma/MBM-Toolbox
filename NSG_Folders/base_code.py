@@ -274,7 +274,7 @@ print("mi_dist")
 print("mi_corr")
 print("ksd")
 
-print("\n" , f-s , "seconds")
+print(f-s , "seconds")
 
 # Convert the array to a DataFrame
 df = pd.DataFrame(Xi)
