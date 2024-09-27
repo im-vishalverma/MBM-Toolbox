@@ -262,10 +262,12 @@ dFC_emp = slicing(bold_emp,window,overlap)
 # the following loop is supposed to calculate the 1/9th of the phase space
 # {Tglu_low}+5 can be adjusted to higher numbers such as {Tglu_low}+15 to find the entire phase space all at once
 # However, it shall be far more time consuming than to divide the calculations into such nine or more 'buckets'
+# we have coarse grained the phase space with discreteness or step size of 0.25 but the user can customize it as per needs
 
+discreteness = 0.25
 i = 0
-for Tglu in np.arange({Tglu_low},{Tglu_low}+5,0.25):
-    for Tgaba in np.arange({Tgaba_low},{Tgaba_low}+5,0.25):
+for Tglu in np.arange({Tglu_low},{Tglu_low}+5,discreteness):
+    for Tgaba in np.arange({Tgaba_low},{Tgaba_low}+5,discreteness):
         r,x = firing_rate(Tglu,Tgaba)
         bold_sim = bold(r)
         FC_sim = func_connec(bold_sim)
