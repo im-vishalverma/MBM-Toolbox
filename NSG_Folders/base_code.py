@@ -139,6 +139,8 @@ def bold(r):
 
 # defining measures
 
+# this function calculates rs-Dfc matrix:
+
 def slicing(bold_data,window,overlap):
     
     number_of_slices = ((bold_data.shape[0]-window)//(window-overlap)) + 1
@@ -176,9 +178,13 @@ def ks_distance_between_matrices(matrix1, matrix2):
 
     return ks_distance
 
+# this function creates Functional Connectivity matrix
+
 def func_connec(bold_data):
     fc_sim = np.corrcoef(bold_data,rowvar = False)
     return fc_sim
+
+# this function finds metastability index of the bold data
 
 def metastability_index(bold_data):
     PhaseSignal = np.angle(hilbert(bold_data, axis=0))  
@@ -186,6 +192,8 @@ def metastability_index(bold_data):
     order_parameter = np.mean(PhaseSignal, axis=0)
     m = np.std(np.abs(order_parameter)) 
     return m
+
+# following functions calculate mutual information matric
 
 def compute_distances(X, Y):
     points = np.column_stack((X, Y))
@@ -220,6 +228,8 @@ def MI_matrix(bold_data):
             I_XY[j, i] = np.abs(mi)  # MI is symmetric
     return I_XY
 
+# this function calculates eucledian distance between two matrices after flattening them out
+
 def eucledian_dist(matrix1, matrix2):
     # Flatten the matrices into 1D arrays
     vector1 = matrix1.flatten()
@@ -231,6 +241,8 @@ def eucledian_dist(matrix1, matrix2):
     # Sum the squared differences and take the square root
     distance = np.sqrt(np.sum(squared_diff))
     return distance/68
+
+# this function calculates pearson correlation coeff between two matrices after flattening them out
 
 def matrix_corrcoef(matrix1, matrix2):
     vector1 = matrix1.flatten()
@@ -246,6 +258,10 @@ overlap = 25
 FC_emp = func_connec(bold_emp)
 mi_emp = MI_matrix(bold_emp)
 dFC_emp = slicing(bold_emp,window,overlap)
+
+# the following loop is supposed to calculate the 1/9th of the phase space
+# {Tglu_low}+5 can be adjusted to higher numbers such as {Tglu_low}+15 to find the entire phase space all at once
+# However, it shall be far more time consuming than to divide the calculations into such nine or more 'buckets'
 
 i = 0
 for Tglu in np.arange({Tglu_low},{Tglu_low}+5,0.25):
@@ -276,13 +292,4 @@ print("ksd")
 
 print(f-s , "seconds")
 
-# Convert the array to a DataFrame
-df = pd.DataFrame(Xi)
-headers = 'x','fc_dist','fc_corr','meta','mi_dist','mi_corr','ksd'
-
-# Save the DataFrame as a CSV file
-file_name = f"Xi{ind}.csv"
-df.to_csv(file_name, columns=headers, index=False)
-
-print(df.head().to_string(index=False))
 '''
