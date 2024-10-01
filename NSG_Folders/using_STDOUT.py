@@ -25,7 +25,8 @@ for file_num in range(9):
         file_content = file.read()
     arrays = extract_arrays(file_content)
     df = pd.DataFrame(arrays)
-    first_row = df.iloc[:,-3]
+    first_row = df.iloc[:,-3] 
+    # by changing -3 to some other integer from 0 to 6, we 7 phase spaces mentioned the paper
     reshaped_array = np.array(first_row).reshape((20, 20))
     arr=reshaped_array
     
@@ -56,13 +57,15 @@ for file_num in range(9):
     elif file_num == 8:
         Xi[40:60, 40:60 ] = arr
 
+alpha = np.where(Xi==np.min(Xi))
+print('glu = ', _[alpha[0][0]], ', gaba = ', _[alpha[1][0]])
+
 plt.subplot(221)
 plt.imshow(Xi, 'bwr',aspect = 'auto',origin = 'lower')
 plt.axis('off')
 plt.colorbar()
 plt.show()
-alpha = np.where(Xi==np.min(Xi))
-print('glu = ', _[alpha[0][0]], ', gaba = ', _[alpha[1][0]])
+
 plt.subplot(222)
 plt.scatter(gaba,glu)
 plt.title(f'glu={glu}, gaba={gaba}')
