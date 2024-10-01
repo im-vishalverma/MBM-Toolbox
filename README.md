@@ -9,11 +9,7 @@ NumPy, Matplotlib, SciPy
 
 # Applications :
 A. Model Optimization
-B. Model Optimization (Fast)
-C. Community Finding using dFC
-D. BOLD variability using dFC
-E. Approximate Message Passing for dFC
-F. Time Shuffled Surrogate Data and its dFC
-G. Phase Randomized BOLD Data and its dFC
-H. Hurst Exponent for Detrended Fluctuation Analysis
-I. TSNE visualization of dFC
+B. Community Finding using dFC
+C. Time Shuffled Surrogate Data and its dFC
+D. Phase Randomized BOLD Data and its dFC
+E. TSNE visualization of dFC
