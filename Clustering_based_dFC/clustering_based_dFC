@@ -115,7 +115,8 @@ labels = kmeans.labels_
 # Reorder the correlation matrix according to the cluster labels
 sorted_indices = np.argsort(labels)
 sorted_correlation_matrix = correlation_matrix[sorted_indices, :][:, sorted_indices]
-s_a = silhouette_score(data_transformed, labels)    
+s_a = silhouette_score(data_transformed, labels)   
+print(s_a)
 # Plot the reordered correlation matrix with cluster annotations
 plt.figure(figsize=(6, 5))
 sns.heatmap(sorted_correlation_matrix, cmap='viridis', annot=False, xticklabels=sorted_indices, yticklabels=sorted_indices)
