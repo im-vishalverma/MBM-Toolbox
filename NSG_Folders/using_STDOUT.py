@@ -7,6 +7,9 @@ _=[]
 for i in np.arange(0.25,15.25,0.25):
         _.append(i)        
 titles = ['Mean Firing Rate', 'FC distance', 'FC correlation', 'Metastability', 'MI distance','MI correlation','dFC KS distance']
+glu_vals = np.ones(11)
+gaba_vals = np.ones(11)
+
 # Function to extract and parse array data
 def extract_arrays(file_content):
     pattern = r'\[([^\]]+)\]'
@@ -17,6 +20,7 @@ def extract_arrays(file_content):
         arrays.append(array)
     
     return arrays
+    
 for k in range(7):
     Xi = np.zeros((60,60))
     
@@ -69,15 +73,44 @@ for k in range(7):
     if k == 1:
         alpha = np.where(Xi==np.min(Xi))
         print('glu = ', _[alpha[0][0]], ', gaba = ', _[alpha[1][0]],'when measure is FC DISTANCE')
+        glu_vals[0] =  _[alpha[0][0]]
+        glu_vals[5] = np.min(Xi)
+        gaba_vals[0] =  _[alpha[1][0]]
+        gaba_vals[5] = np.min(Xi)
     if k == 2:
         alpha = np.where(Xi==np.max(Xi))
         print('glu = ', _[alpha[0][0]], ', gaba = ', _[alpha[1][0]],'when measure is FC CORRELATION')
+        glu_vals[1] =  _[alpha[0][0]]
+        glu_vals[6] = np.max(Xi)
+        gaba_vals[1] =  _[alpha[1][0]]
+        gaba_vals[6] = np.max(Xi)
     if k == 4:
         alpha = np.where(Xi==np.min(Xi))
         print('glu = ', _[alpha[0][0]], ', gaba = ', _[alpha[1][0]],'when measure is MI DISTANCE')
+        glu_vals[2] =  _[alpha[0][0]]
+        glu_vals[7] = np.min(Xi)
+        gaba_vals[2] =  _[alpha[1][0]]
+        gaba_vals[7] = np.min(Xi)
     if k == 5:
         alpha = np.where(Xi==np.max(Xi))
         print('glu = ', _[alpha[0][0]], ', gaba = ', _[alpha[1][0]],'when measure is MI CORRELATION')
+        glu_vals[3] =  _[alpha[0][0]]
+        glu_vals[8] = np.max(Xi)
+        gaba_vals[3] =  _[alpha[1][0]]
+        gaba_vals[8] = np.max(Xi)
     if k == 6:
         alpha = np.where(Xi==np.min(Xi))
         print('glu = ', _[alpha[0][0]], ', gaba = ', _[alpha[1][0]],'when measure is DFC KS DISTANCE')
+        glu_vals[4] =  _[alpha[0][0]]
+        glu_vals[9] = np.min(Xi)
+        gaba_vals[4] =  _[alpha[1][0]]
+        gaba_vals[9] = np.min(Xi)
+
+
+df1 = pd.read_csv('gluta.csv')
+df1.iloc[number] = glu_vals
+df1.to_csv('gluta.csv', index=False)
+matrix = np.zeros((55, 11))
+df2 = pd.read_csv('gaba.csv')
+df2.iloc[number] = gaba_vals
+df2.to_csv('gaba.csv', index=False)
